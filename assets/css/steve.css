@@ -1,0 +1,30 @@
+.steveblocks-block {
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+    width: 100%;
+	padding: 1rem;
+}
+steveblocks-feature-image {
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	margin: 0 auto;
+}
+.steveblocks-image-button {
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	margin: 0 auto;
+}
+.wp-block-steveblocks-feature-block .steveblocks-feature-image {
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-justify-content: center;
+	justify-content: center;
+}
+.steveblocks-feature-image img {
+	width: auto;
+	max-height: 500px;
+}
