@@ -23,17 +23,11 @@ services:
     depends_on:
       - mysql
       - wordpress
-    command: >
-      bash -c "
-        sleep 10 &&
-        wp core install --url=http://localhost:8888/ --title=SteveLand --admin_user=admin --admin_password=very_weak_password --admin_email=cameron.lowe@refinery29.com &&
-        wp plugin activate gutenberg &&
-        wp plugin activate SteveGutenberg"
-
-
 
   mysql:
     image: mysql:5.7
+    ports:
+      - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: example
       MYSQL_DATABASE: wordpress_test
