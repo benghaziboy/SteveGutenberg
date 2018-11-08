@@ -20,6 +20,6 @@ if [[ -z "$WP_EMAIL" ]]; then
   WP_EMAIL="email@example.com"
 fi
 
-docker-compose run cli wp core install --url=${WP_URL} --title=${WP_TITLE} --admin_user=${WP_USER} --admin_password=${WP_PASSWORD} --admin_email=${WP_EMAIL}
-docker-compose run cli wp plugin activate gutenberg
-docker-compose run cli wp plugin activate SteveGutenberg
+docker-compose run cli /bin/bash -c "wp core install --url=${WP_URL} --title=${WP_TITLE} --admin_user=${WP_USER} --admin_password=${WP_PASSWORD} --admin_email=${WP_EMAIL} &&
+  wp plugin activate gutenberg &&
+  wp plugin activate SteveGutenberg"
