@@ -21,5 +21,6 @@ if [[ -z "$WP_EMAIL" ]]; then
 fi
 
 wp core install --url=${WP_URL} --title=${WP_TITLE} --admin_user=${WP_USER} --admin_password=${WP_PASSWORD} --admin_email=${WP_EMAIL} 
+wp plugin install gutenberg
 wp plugin activate gutenberg
 wp plugin activate SteveGutenberg
