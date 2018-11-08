@@ -1,0 +1,25 @@
+{
+  "name": "stevegutenberg",
+  "version": "1.0.0",
+  "description": "In honor of a living legend",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "globals": {
+    "window": true,
+    "wp": true
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^5.8.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-react": "^7.11.1"
+  }
+}
