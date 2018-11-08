@@ -1,3 +1,5 @@
+/* global _ window wp */
+
 /**
  * Register BlockType
  */
@@ -29,10 +31,8 @@
       },
     },
     edit(props) {
-      const focus = props.focus;
-      const focusedEditable = props.focus ? props.focus.editable || 'titleOne' : null;
-      const attributes = props.attributes;
-      const alignment = attributes.alignment;
+      const { alignment, attributes, focus } = props;
+      const focusedEditable = focus ? focus.editable || 'titleOne' : null;
 
       const onSelectImageOne = function (media) {
         return props.setAttributes({
@@ -51,14 +51,14 @@
         el(
           wp.editor.BlockControls,
           null,
-          el( 
+          el(
             wp.editor.AlignmentToolbar,
             {
               value: alignment,
-              onChange: onChangeAlignment
-            }
-          )
-        )
+              onChange: onChangeAlignment,
+            },
+          ),
+        ),
       );
 
       const inspectorControls = !!focus && el(
@@ -69,89 +69,87 @@
       );
 
       const imageBlock = el(
-        'div', 
-        { className: props.className + 'steveblocks-cols-' + attributes.columns },
-        el( 
+        'div',
+        { className: `${props.className}` },
+        el(
           'div',
           { className: 'steveblocks-block steveblocks-block-1' },
           el(
             'div',
-            { 
-              className: attributes.mediaIDOne ? 'steveblocks-feature-image steveblocks-image-button image-active' : 'steveblocks-feature-image steveblocks-feature-image-1 image-inactive' 
+            {
+              className: attributes.mediaIDOne ? 'steveblocks-feature-image steveblocks-image-button image-active' : 'steveblocks-feature-image steveblocks-feature-image-1 image-inactive',
             },
             el(
               wp.editor.MediaUpload, {
-              onSelect: onSelectImageOne,
-              type: 'image',
-              value: attributes.mediaIDOne,
-              render: function( obj ) {
-                return el( wp.components.Button, {
-                  className: attributes.mediaIDOne ? 'image-button-1' : 'components-button button button-large button-one',
-                  onClick: obj.open
+                onSelect: onSelectImageOne,
+                type: 'image',
+                value: attributes.mediaIDOne,
+                render(obj) {
+                  return el(wp.components.Button, {
+                    className: attributes.mediaIDOne ? 'image-button-1' : 'components-button button button-large button-one',
+                    onClick: obj.open,
+                  },
+                  attributes.mediaIDOne ? el('img', { src: attributes.mediaURLOne }) : i18n.__('Upload Image'));
                 },
-                attributes.mediaIDOne ? el( 'img', { src: attributes.mediaURLOne } ) : i18n.__( 'Upload Image' )
-                );
-              }
-            } )
-          )
-        )
+              },
+            ),
+          ),
+        ),
       );
 
-      textBlock = el( 
-        'div', 
+      const textBlock = el(
+        'div',
         {
-          className: 'steveblocks-feature-content steveblocks-feature-content-1', 
-          style: { textAlign: alignment }
+          className: 'steveblocks-feature-content steveblocks-feature-content-1',
+          style: { textAlign: alignment },
         },
-        el( 
+        el(
           wp.editor.RichText,
           {
             tagName: 'h3',
             className: 'steveblocks-title-1',
             inline: true,
-            placeholder: i18n.__( 'Say something nice about Steve Gutenberg...' ),
+            placeholder: i18n.__('Say something nice about Steve Gutenberg...'),
             value: attributes.titleOne,
-            onChange: function( newTitle ) { props.setAttributes( { titleOne: newTitle } ) },
-            focus: focusedEditable === 'titleOne' ? focus: null,
-            onFocus: function( focus ) {
-              props.setFocus( _.extend( {}, focus, { editable: 'titleOne' } ) );
-            }
-          }
-        )
-       );
+            onChange(newTitle) { props.setAttributes({ titleOne: newTitle }); },
+            focus: focusedEditable === 'titleOne' ? focus : null,
+            onFocus(_focus) {
+              props.setFocus(_.extend({}, _focus, { editable: 'titleOne' }));
+            },
+          },
+        ),
+      );
 
-      return [ 
+      return [
         blockControls,
         inspectorControls,
         imageBlock,
-        textBlock
+        textBlock,
       ];
     },
-    
+
     save(props) {
-      const attributes = props.attributes;
-      const alignment = props.attributes.alignment;
+      const { attributes } = props;
 
       return (
         el(
           'div',
-          { className: props.className + 'steveblocks-cols-' + attributes.columns },
+          { className: `${props.className}` },
           attributes.mediaURLOne && el(
             'div',
             { className: 'steveblocks-feature-image steveblocks-feature-image-1', style: {} },
-            el( 'img', { src: attributes.mediaURLOne } )
+            el('img', { src: attributes.mediaURLOne }),
           ),
           el(
             'div',
-            { 
-              className: 'steveblocks-feature-content steveblocks-feature-content-1', 
-              style: { textAlign: attributes.alignment }
+            {
+              className: 'steveblocks-feature-content steveblocks-feature-content-1',
+              style: { textAlign: attributes.alignment },
             },
-            el( 'h3', { className: 'steveblocks-title-1' }, attributes.titleOne )
-          )
+            el('h3', { className: 'steveblocks-title-1' }, attributes.titleOne),
+          ),
         )
       );
-      
     },
   });
 }(
