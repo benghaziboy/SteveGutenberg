@@ -17,7 +17,7 @@ greatest living actor, Steve Gutenberg.
 `./bin/run.sh`
 
 ### Local Site
-[http://localhost:8888](http://localhost:8888)
+[http://localhost:8888/wp-admin](http://localhost:8888/wp-admin)
 
 ```
 Test Credentials
