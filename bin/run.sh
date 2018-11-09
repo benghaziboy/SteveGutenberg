@@ -10,3 +10,5 @@ docker-compose up -d wordpress
 # Ideally we should be checking the status until mysql is available.
 sleep 10;
 . ./bin/install.sh
+
+npm run dev
