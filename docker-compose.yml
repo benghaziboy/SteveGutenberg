@@ -20,6 +20,7 @@ services:
     user: xfs
     volumes:
       - wordpress:/var/www/html
+      - .:/var/www/html/wp-content/plugins/SteveGutenberg
       - ./bin/cli:/bin/cli
     depends_on:
       - mysql
